@@ -1,4 +1,4 @@
-﻿import { readFileSync } from "fs";
+import { readFileSync } from "fs";
 import { join } from "path";
 
 let WebSocketClass: typeof import("ws").default | null = null;
@@ -8,7 +8,7 @@ try {
 } catch { /* not available */ }
 
 const GATEWAY_URL = "ws://127.0.0.1:18789";
-const CONFIG_PATH = join("C:", "Users", "spaz", ".openclaw", "openclaw.json");
+const CONFIG_PATH = join(homedir(), ".openclaw", "openclaw.json");
 
 function readToken(): string {
   const raw = readFileSync(CONFIG_PATH, "utf-8");

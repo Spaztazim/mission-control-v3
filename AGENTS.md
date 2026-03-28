@@ -1,4 +1,4 @@
-ï»¿# AGENTS.md â€” Mission Control v3
+# AGENTS.md — Mission Control v3
 
 ## What This Is
 Mission Control is the operational command center for an AI agent swarm called "The Moth Colony." It's a single-pane-of-glass dashboard that monitors agents, tasks, infrastructure, and business metrics for a small business operator running multiple companies.
@@ -12,7 +12,7 @@ Think: a cyberpunk version of Grafana meets Linear meets a personal AI command c
 - **Real-time:** WebSocket connection to OpenClaw Gateway (ws://127.0.0.1:18789)
 - **Charts:** Recharts or lightweight alternative
 - **Icons:** Lucide React
-- **Animation:** Framer Motion (sparingly â€” for page transitions and micro-interactions)
+- **Animation:** Framer Motion (sparingly — for page transitions and micro-interactions)
 - **TypeScript:** Strict mode, no `any`
 
 ## Design System
@@ -44,7 +44,7 @@ The app has two themes toggled by a switch in the header:
 ### Component Style
 - Cards with subtle borders (`border-border`), no heavy shadows
 - Rounded corners: `rounded-lg` (8px)
-- Spacing: generous, breathable â€” not cramped
+- Spacing: generous, breathable — not cramped
 - Status indicators: colored dots with pulse animation for live
 - Hover states: subtle glow matching primary color
 - Transitions: 200-300ms ease, nothing jarring
@@ -67,20 +67,20 @@ Protocol: JSON-RPC style with challenge/auth handshake.
 - Expose as singleton, used by API routes (server-side)
 
 Key RPC methods available:
-- `status` â€” gateway health, uptime, connected agents
-- `sessions.list` â€” active agent sessions
-- `sessions.send` â€” send message to a session
-- `cron.list` / `cron.update` â€” manage scheduled jobs
-- `config.get` / `config.patch` â€” read/write OpenClaw config
-- `skills.list` â€” installed skills
-- `usage` â€” token usage stats
+- `status` — gateway health, uptime, connected agents
+- `sessions.list` — active agent sessions
+- `sessions.send` — send message to a session
+- `cron.list` / `cron.update` — manage scheduled jobs
+- `config.get` / `config.patch` — read/write OpenClaw config
+- `skills.list` — installed skills
+- `usage` — token usage stats
 
 ### API Routes (`app/api/`)
 Thin server-side wrappers around the gateway bridge. Each returns JSON.
-Keep them focused â€” one concern per route.
+Keep them focused — one concern per route.
 
 ### File Operations
-Some features read/write markdown files from the workspace (`C:\Users\spaz\clawd\`):
+Some features read/write markdown files from the workspace (`$WORKSPACE_PATH/`):
 - `MEMORY.md`, `APPROVALS.md`, `INBOX.md`, `HEARTBEAT.md`
 - `memory/*.md` (daily logs)
 - `mission-control/BOARD.md`
@@ -97,7 +97,7 @@ Client components connect via a React context provider that manages the WS lifec
 The home screen. At-a-glance status of everything.
 - **System Status Bar:** Gateway status, agent count, active sessions, uptime
 - **Token Burn Card:** Today's spend, monthly spend, budget gauge, cache hit ratio
-- **Agent Grid:** Cards for each agent (Lux, Deckard, Vyxelle) â€” status, last message, model
+- **Agent Grid:** Cards for each agent (Lux, Deckard, Vyxelle) — status, last message, model
 - **Active Tasks:** Top 5 from ClickUp pipeline (fetched via API)
 - **Recent Activity Feed:** Last 10 events (task completions, cron runs, alerts)
 - **Quick Actions:** Buttons for common ops (spawn moth, run cron, check inbox)
@@ -111,7 +111,7 @@ Monitor and control the moth colony.
 
 ### 3. Tasks (`/tasks`)
 ClickUp integration + approvals.
-- **Pipeline Board:** Kanban columns (Backlog â†’ In Progress â†’ QA Review â†’ Done)
+- **Pipeline Board:** Kanban columns (Backlog ? In Progress ? QA Review ? Done)
 - **Task Cards:** Title, assignee, tags, priority, due date
 - **Approvals Sub-tab:** Items from APPROVALS.md with Approve/Reject/Defer buttons
 - **Create Task:** Quick form (title, description, list, tags)
@@ -251,14 +251,14 @@ src/
 - Performance: no unnecessary re-renders, memoize expensive computations
 
 ## Reference
-The previous version (MC2) lives at `C:\Users\spaz\clawd\mission-control-v2\`.
+The previous version (MC2) lives at `$WORKSPACE_PATH/mission-control-v2\`.
 Its `src/lib/gateway-ws.ts` has the working WebSocket bridge implementation.
 Its API routes in `src/app/api/` show the RPC patterns that work.
 Use MC2 as reference for what works, but build MC3 from scratch with better architecture.
 
 ## Don't
-- Don't use a UI component library (shadcn, MUI, etc.) â€” build components from scratch with Tailwind
-- Don't add a database â€” all state comes from the gateway or filesystem
-- Don't over-engineer auth â€” this runs on a private Tailscale network
-- Don't use `getServerSideProps` â€” this is App Router, use Server Components and API routes
-- Don't hardcode file paths â€” use env vars or config for workspace path
+- Don't use a UI component library (shadcn, MUI, etc.) — build components from scratch with Tailwind
+- Don't add a database — all state comes from the gateway or filesystem
+- Don't over-engineer auth — this runs on a private Tailscale network
+- Don't use `getServerSideProps` — this is App Router, use Server Components and API routes
+- Don't hardcode file paths — use env vars or config for workspace path
